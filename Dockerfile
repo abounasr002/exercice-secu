@@ -7,19 +7,18 @@ WORKDIR /app
 # Copier les fichiers package.json et package-lock.json dans le conteneur
 COPY package*.json ./
 
-# RUN est une instruction lancée au build de l'image.
-# Installer les dépendances (installation au sein du projet)
+# Installer les dépendances
 RUN npm ci
 
-# Installer nodemon dans le conteneur (installation dans l'environnement de développement)
+# Installer nodemon dans l'environnement global
 RUN npm install -g nodemon
 
-# Copier le reste des fichiers dans le conteneur (pour le fonctionnement correct de nodemon)
+# Définir la variable d'environnement par défaut (peut être surchargée au runtime)
+ENV NODE_ENV=production
+
+# Copier le reste des fichiers dans le conteneur
 COPY . .
 
-
-#Cmd est une instruction lancée à l'instanciation du conteneur.
-# Commande à exécuter au démarrage du conteneur
-CMD ["npm", "start"]
-
+# Utiliser un script shell pour conditionner le démarrage
+CMD ["sh", "-c", "if [ \"$NODE_ENV\" = \"development\" ]; then npm run dev; else npm start; fi"]
 
