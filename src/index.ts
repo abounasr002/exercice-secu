@@ -6,6 +6,7 @@ import AuthRoutes from "./routes/AuthRoutes";
 import swaggerDocs from './config/swagger';
 import swaggerUi from 'swagger-ui-express'
 import cors from 'cors';
+import UserRoutes from "./routes/UserRoutes";
 
 //Création serveur express
 const app = express()
@@ -38,6 +39,7 @@ connectDB();
 //TODO ajouter routes ici
 app.use('/todos', TodoRoutes)
 app.use('/auth', AuthRoutes)
+app.use('/users', UserRoutes)
 
 // Route pour accéder au JSON brut
 app.get('/api-docs.json', (req, res) => {
@@ -47,6 +49,8 @@ app.get('/api-docs.json', (req, res) => {
 
 // Swagger route
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+console.log(process.env.NODE_ENV);
 
 //app.listen indique au serveur d'écouter les requêtes HTTP arrivant sur le
 //port indiqué

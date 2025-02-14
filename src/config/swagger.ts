@@ -10,7 +10,7 @@ const swaggerOptions = {
         },
         servers: [
             {
-                url: "wesh", // URL de votre API
+                url: process.env.API_URL, // URL de votre API
             },
         ],
     },

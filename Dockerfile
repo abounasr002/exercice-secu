@@ -14,7 +14,7 @@ RUN npm ci
 RUN npm install -g nodemon
 
 # Définir la variable d'environnement par défaut (peut être surchargée au runtime)
-ENV NODE_ENV=production
+#ENV NODE_ENV=production
 
 # Copier le reste des fichiers dans le conteneur
 COPY . .
