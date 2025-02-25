@@ -47,6 +47,13 @@ app.get('/api-docs.json', (req, res) => {
     res.send(swaggerDocs);
 });
 
+
+app.get('/swagger.json', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(swaggerDocs);
+   })
+
+
 // Swagger route
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
